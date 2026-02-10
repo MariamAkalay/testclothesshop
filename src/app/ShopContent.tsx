@@ -82,6 +82,11 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
             <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-stone-900/60 backdrop-blur-md text-stone-200 border border-stone-700/50">
               {product.categorie}
             </div>
+            {!product.disponibilite && (
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-stone-600/80 backdrop-blur-md text-stone-300 border border-stone-500/50">
+                Pas disponible pour le moment
+              </div>
+            )}
           </div>
 
           <div className="p-6">
@@ -94,11 +99,16 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
               </span>
               <motion.button
                 onClick={() => onAddToCart(product)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-shadow"
+                whileHover={{ scale: product.disponibilite ? 1.05 : 1 }}
+                whileTap={{ scale: product.disponibilite ? 0.95 : 1 }}
+                disabled={!product.disponibilite}
+                className={`px-4 py-2 rounded-lg text-sm font-medium shadow-lg transition-shadow ${
+                  product.disponibilite
+                    ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white hover:shadow-xl'
+                    : 'bg-stone-700 text-stone-400 cursor-not-allowed'
+                }`}
               >
-                Ajouter au panier
+                {product.disponibilite ? 'Ajouter au panier' : 'Pas disponible'}
               </motion.button>
             </div>
           </div>

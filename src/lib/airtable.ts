@@ -9,7 +9,7 @@ export interface Product {
   nom: string;
   prix: number;
   image: string;
-  disponibilite: string;
+  disponibilite: boolean;
   categorie: string;
 }
 
@@ -30,7 +30,7 @@ export async function getProducts(): Promise<Product[]> {
         nom: (fields.nom as string) || '',
         prix: (fields.prix as number) || 0,
         image: imageField?.[0]?.url || '',
-        disponibilite: (fields.disponibilite as string) || 'Disponible',
+        disponibilite: (fields.disponibilite as boolean) ?? true,
         categorie: (fields.categorie as string) || 'Autre',
       };
     });
