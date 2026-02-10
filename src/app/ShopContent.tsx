@@ -83,7 +83,7 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
               {product.categorie}
             </div>
             {!product.disponibilite && (
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-stone-600/80 backdrop-blur-md text-stone-300 border border-stone-500/50">
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-red-500/80 backdrop-blur-md text-white border border-red-400/50">
                 Pas disponible pour le moment
               </div>
             )}
@@ -97,19 +97,16 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
               <span className="text-2xl font-bold text-amber-400">
                 {product.prix}DH
               </span>
-              <motion.button
-                onClick={() => onAddToCart(product)}
-                whileHover={{ scale: product.disponibilite ? 1.05 : 1 }}
-                whileTap={{ scale: product.disponibilite ? 0.95 : 1 }}
-                disabled={!product.disponibilite}
-                className={`px-4 py-2 rounded-lg text-sm font-medium shadow-lg transition-shadow ${
-                  product.disponibilite
-                    ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white hover:shadow-xl'
-                    : 'bg-stone-700 text-stone-400 cursor-not-allowed'
-                }`}
-              >
-                {product.disponibilite ? 'Ajouter au panier' : 'Pas disponible'}
-              </motion.button>
+              {product.disponibilite && (
+                <motion.button
+                  onClick={() => onAddToCart(product)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 rounded-lg text-sm font-medium shadow-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-white hover:shadow-xl transition-shadow"
+                >
+                  Ajouter au panier
+                </motion.button>
+              )}
             </div>
           </div>
         </div>

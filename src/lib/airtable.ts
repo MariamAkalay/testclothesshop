@@ -30,7 +30,7 @@ export async function getProducts(): Promise<Product[]> {
         nom: (fields.nom as string) || '',
         prix: (fields.prix as number) || 0,
         image: imageField?.[0]?.url || '',
-        disponibilite: (fields.disponibilite as boolean) ?? true,
+        disponibilite: (fields.disponibilite as boolean) ?? false,
         categorie: (fields.categorie as string) || 'Autre',
       };
     });
